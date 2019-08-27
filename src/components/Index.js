@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Login from './Login/Login';
-import requireAuth from '../HOC/requireAuth';
-import Home from './Home/Home';
-import {HocDashboard} from '../router/routes';
 import AppRoute from '../router/AppRoute';
-
-class App extends React.Component{
+import {getStore} from '../getStore';
+const store = getStore();
+import { Provider } from 'react-redux';
+class App extends React.Component {
     state = {
       answer:0
     }
@@ -19,14 +18,15 @@ class App extends React.Component{
       this.setState({answer: await this.asyncFunc()});
     }
     render() {
-      const LoginME = requireAuth(Login);
+      // const LoginME = requireAuth(Login);
       return (
         <div>
           {/*<h2>Wow Tree Class Component -- {this.state.answer}</h2>*/}
-
-          {/*<LoginME/>*/}
-          <Home/>
-          {/*<AppRoute/>*/}
+          <Provider store={store}>
+            <AppRoute/>
+            {/*<LoginME/>*/}
+            {/*<Home/>*/}
+          </Provider>
         </div>
       );
     }

@@ -1,8 +1,20 @@
 import React from 'react';
 import './drawerHoc.css';
+import {connect} from 'react-redux';
+import {history} from '../helper/history';
+import {privateNav} from '../router/privateNav';
+import {publicNav} from '../router/publicNav';
 
-const drawerHoc = (Component) => {
-  return class Drawer extends React.Component{
+export const drawerHoc = (Component) => {
+  class Drawer extends React.Component{
+    componentDidMount() {
+      window.$(document).ready(function () {
+        window.$('#sidebarCollapse').on('click', function () {
+          window.$('#sidebar').toggleClass('active');
+        });
+      });
+    }
+
     render() {
       return (
         <div className="wrapper">
@@ -13,26 +25,14 @@ const drawerHoc = (Component) => {
 
             <ul className="list-unstyled components">
               <p>Money Pool</p>
-              <li className="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
-                    User Management
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                    Pool Management
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                    Profile
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                    Logout
-                </a>
-              </li>
+              {privateNav.map(item => {
+                return <li key={item}>
+                  <a href="javascript:void(0)" onClick={()=> history.push(item.url)}>
+                    {item.name}
+                  </a>
+                </li>;
+              })}
+
             </ul>
 
           </nav>
@@ -55,18 +55,12 @@ const drawerHoc = (Component) => {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul className="nav navbar-nav ml-auto">
-                    <li className="nav-item active">
-                      <a className="nav-link" href="#">Home</a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="#">About</a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="#">Contact Us</a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="#">Logout</a>
-                    </li>
+                    {publicNav.map(item => {
+                      return <li key={item} className="nav-item">
+                        <a className="nav-link" href="javascript:void(0)" onClick={()=>history.push(item.url)}>{item.name}</a>
+                      </li>;
+                    })}
+
                   </ul>
                 </div>
               </div>
@@ -77,6 +71,6 @@ const drawerHoc = (Component) => {
         </div>
       );
     }
-  };
+  }
+  return connect(undefined,undefined)(Drawer);
 };
-export default drawerHoc;

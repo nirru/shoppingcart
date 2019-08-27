@@ -1,13 +1,12 @@
 'use strict';
-
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-
+// const NODE_ENV = process.env.NODE_ENV || 'development';
 // module.exports = {
 //   entry: [
 //     '@babel/polyfill',
-//     path.join(__dirname, 'lib', 'components/index.js'),
+//     path.join(__dirname, 'src', 'components/index.js'),
 //   ],
 //
 //   module: {
@@ -62,7 +61,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: [
     '@babel/polyfill',
-    path.join(__dirname, 'lib',  'components/Index.js'),
+    path.join(__dirname, 'src',  'components/Index.js'),
   ],
   output: {
     path: path.join(__dirname, 'public'),
@@ -115,11 +114,17 @@ module.exports = {
       appMountId: 'root',
       // template: '!!ejs-loader!./views/index.ejs'
       template: './public/index.html'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_URL: JSON.stringify(process.env.API_URL),
+      }
     })
   ],
   devServer: {
     hot: true,
-    // historyApiFallback: true,
+    historyApiFallback: true,
     port:8087
   }
 };

@@ -2,13 +2,14 @@
   "name": "money-pool",
   "version": "1.0.0",
   "description": "Money Pool",
-  "main": "lib/server.js",
+  "main": "src/server.js",
   "author": "Nirmal Kumar",
   "license": "MIT",
   "scripts": {
-    "dev": "pm2 start lib/server.js --watch --interpreter babel-node",
+    "dev": "pm2 start src/server.js --watch --interpreter babel-node",
     "webpack": "webpack -wd",
-    "start:dev": "webpack-dev-server --open --mode development",
+    "start:dev": "cross-env NODE_ENV=development env-cmd -f ./.env.development webpack-dev-server --config ./index.js --open --mode development",
+    "prod": "cross-env NODE_ENV=development env-cmd -f ./.env.development webpack-dev-server --config ./index.js --open --mode development",
     "build": "webpack",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -27,6 +28,7 @@
     "babel-eslint": "^10.0.2",
     "connect-history-api-fallback": "latest",
     "css-loader": "^3.1.0",
+    "dotenv": "^8.1.0",
     "ejs-loader": "^0.3.3",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
@@ -59,7 +61,9 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.5.5",
     "babel-loader": "^8.0.6",
+    "cross-env": "^5.2.0",
     "ejs": "^2.6.2",
+    "env-cmd": "^9.0.3",
     "es6-promise": "^4.2.8",
     "express": "^4.17.1",
     "immutable": "^4.0.0-rc.12",
@@ -73,6 +77,7 @@
     "redux": "^4.0.4",
     "redux-saga": "^1.0.5",
     "reselect": "^4.0.0",
-    "webpack": "^4.36.1"
+    "webpack": "^4.36.1",
+    "webpack-merge": "^4.2.1"
   }
 }

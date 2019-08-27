@@ -1,30 +1,30 @@
 import React from 'react';
 import './login.css';
-import {getCurrentUserInfo} from '../../actions';
-import {getStore} from '../../getStore';
-const store = getStore();
+import {getCurrentUserInfo, setCurrentUser} from '../../actions';
+import {connect} from 'react-redux';
+
 class Login extends React.Component {
 
   constructor(props){
     super(props);
     this.state= {
-      email:'n@N.com',
-      password:'12',
+      email:'',
+      password:'',
     };
-
-    store.dispatch(getCurrentUserInfo(this.state));
   }
 
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
-
     });
-
   };
 
   callback = e => {
     e.preventDefault();
+    console.log('CLICK')
+    const {dispatch} = this.props;
+    dispatch(getCurrentUserInfo(this.state));
+    dispatch(setCurrentUser(this.state));
   };
   render() {
     return (
@@ -66,4 +66,5 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+
+export default connect(undefined,undefined)(Login);
