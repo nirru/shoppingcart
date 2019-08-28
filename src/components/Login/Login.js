@@ -13,6 +13,10 @@ class Login extends React.Component {
     };
   }
 
+  componentDidMount() {
+    localStorage.removeItem('USER');
+  }
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
@@ -24,7 +28,7 @@ class Login extends React.Component {
     console.log('CLICK')
     const {dispatch} = this.props;
     dispatch(getCurrentUserInfo(this.state));
-    dispatch(setCurrentUser(this.state));
+    // dispatch(setCurrentUser(this.state));
   };
   render() {
     return (
