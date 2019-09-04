@@ -17,7 +17,7 @@ class Home extends React.Component {
     console.log(data);
     return (
       <div className="wrapper">
-        {fetched ? <UserList/> : 'laoding....'}
+        {fetched ? <UserList data = {data}/> : 'loading....'}
       </div>
     );
   }

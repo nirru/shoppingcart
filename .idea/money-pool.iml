@@ -14,5 +14,6 @@
     <orderEntry type="library" name="popper" level="application" />
     <orderEntry type="library" name="solid" level="application" />
     <orderEntry type="library" name="jquery.mCustomScrollbar.concat" level="application" />
+    <orderEntry type="library" name="bootstrap-toggle" level="application" />
   </component>
 </module>
