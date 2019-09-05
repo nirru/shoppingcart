@@ -1,19 +1,22 @@
 import { createSelector } from 'reselect';
 export const usersSelector = createSelector(
   state=>state.get('userList'),
-  userList=>userList
+  userList=> {
+    console.log(userList.get('data'));
+    return userList;
+  }
 );
 
-export const userSelector = (id,isActive) => (state) => {
-  const entry = usersSelector(state).map(user => {
-    console.log(user);
-    return user.get('id') === id ? user.set('is_account_active', isActive) : user;
+export const userSelector = (id) =>(isActive)=> (state) => {
+  // console.log(id);
+  const entry = usersSelector(state).get('data').map(user => {
+    console.log(user.get('id')===1);
+    return user.get('id') === 1 ? user.set('is_account_active', 1) : user;
   });
   if (entry) {
-    console.log('aaaaaaaa');
+    console.log(entry.toJS());
     return entry;
   } else {
-    console.log('bbbbbbbbbbb');
-    return state.get('userList');
+    return null;
   }
 };

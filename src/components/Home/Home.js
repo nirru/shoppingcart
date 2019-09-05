@@ -14,7 +14,6 @@ class Home extends React.Component {
   }
   render() {
     const {message,fetched,data} = this.props;
-    console.log(data);
     return (
       <div className="wrapper">
         {fetched ? <UserList data = {data}/> : 'loading....'}

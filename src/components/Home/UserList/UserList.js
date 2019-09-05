@@ -3,7 +3,7 @@ import './userlist.css';
 import Switch from '../../Switch/Switch';
 import {userListSelector} from '../../../selectors';
 import {connect} from 'react-redux';
-import {userSelector} from '../../../selectors/enableUserSelector';
+import {userSelector, usersSelector} from '../../../selectors/enableUserSelector';
 class UserList extends React.Component{
   constructor(props){
     super(props);
@@ -19,7 +19,8 @@ class UserList extends React.Component{
     });
   };
   render() {
-    console.log(this.props.user);
+    const {message,fetched,data} = this.props;
+    console.log(data);
     return (
       <div className="div-css">
         <div className="table-wrapper">
@@ -51,7 +52,7 @@ class UserList extends React.Component{
               </tr>
             </thead>
             <tbody>
-              {this.props.data.map(item=>{
+              {data.map(item=>{
                 return <tr key={item.id}>
                   <td>{item.id}</td>
                   <td>
@@ -93,18 +94,16 @@ class UserList extends React.Component{
             </ul>
           </div>
         </div>
-
-
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const user = userSelector(state);
-  console.log(user)
+  const user = userSelector(1)(1)(state);
+  console.log(user.toJS());
   return user ? {
-    // ...user.toJS(),
+    ...user.toJS(),
     fetched:true
   } : {
     fetched:false
