@@ -1,2 +1,2 @@
 export { currentUserSelector } from './currentUserSelector';
-export { userListSelector } from './userListSelector';
+export { planListSelector } from './planListSelector';

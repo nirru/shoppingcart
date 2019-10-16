@@ -1,5 +1,5 @@
 import {takeLatest,put} from 'redux-saga/effects';
-import {setUserList} from '../actions';
+import {SET_ACTIVE_USER, setUserList} from '../actions';
 import {GET_USER_LIST} from '../actions/getUserList';
 
 function * fetchUsers() {

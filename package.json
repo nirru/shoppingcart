@@ -78,6 +78,7 @@
     "redux-saga": "^1.0.5",
     "reselect": "^4.0.0",
     "webpack": "^4.36.1",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "history": "latest"
   }
 }

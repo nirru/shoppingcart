@@ -4,10 +4,20 @@ import {connect} from 'react-redux';
 
 class About extends React.Component{
 
+  componentDidMount() {
+    this.setState({
+      user:this.props.user,
+      item: this.props.item
+    });
+  }
+
   render() {
+
     return (
       <div>
-                About
+        <h2>
+                About us
+        </h2>
       </div>
     );
   }

@@ -8,6 +8,10 @@ export const privateNav = [
     name: 'Pool Management',
   },
   {
+    url: '/plan',
+    name: 'Plan',
+  },
+  {
     url: '/profile',
     name: 'Profile',
   },

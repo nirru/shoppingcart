@@ -1,9 +1,6 @@
 import express from 'express';
 import config from './config';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackConfig from '../webpack.config';
-import bodyParser from 'body-parser';
 import webpack from 'webpack';
 
 const app = express();

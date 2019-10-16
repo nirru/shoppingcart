@@ -26,7 +26,7 @@ export const drawerHoc = (Component) => {
             <ul className="list-unstyled components">
               <p>Money Pool</p>
               {privateNav.map(item => {
-                return <li key={item}>
+                return <li key={item.name}>
                   <a href="javascript:void(0)" onClick={()=> history.push(item.url)}>
                     {item.name}
                   </a>
@@ -56,7 +56,7 @@ export const drawerHoc = (Component) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul className="nav navbar-nav ml-auto">
                     {publicNav.map(item => {
-                      return <li key={item} className="nav-item">
+                      return <li key={item.name} className="nav-item">
                         <a className="nav-link" href="javascript:void(0)" onClick={()=>history.push(item.url)}>{item.name}</a>
                       </li>;
                     })}

@@ -1,0 +1,28 @@
+For more refrence visit the below link
+https://alligator.io/js/using-js-mixins/
+
+Mixin :- mixin behave like object mixing layer where we pass in the target and the source.
+The target is appended to the source and new object is returned.
+So now we know mixin allow us to create a modified definition that can
+be applied to existing superclass to create a new subclass.
+
+//The swim property here is the mixin
+let swim = {
+  location() {
+    console.log(`Heading ${this.direction} at ${this.speed}`);
+  }
+};
+
+let Alligator = function(speed, direction) {
+  this.speed = speed,
+  this.direction = direction
+};
+
+//This is our source object
+let alligator = new Alligator('20 mph','North');
+
+alligator = Object.assign(alligator, swim);
+console.log(alligator.location());
+alligator = Object.assign(alligator, swim, crawl);
+
+Closure:
