@@ -12,6 +12,14 @@ export const privateNav = [
     name: 'Plan',
   },
   {
+    url: '/transaction',
+    name: 'Transaction',
+  },
+  {
+    url: '/survey',
+    name: 'Survey',
+  },
+  {
     url: '/profile',
     name: 'Profile',
   },

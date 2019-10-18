@@ -18,6 +18,9 @@ var fluffy = new Cat('Fluffy','White');
 fluffy.speak();
 
 
-
+//Remember that according to our guideline,
+// this in a function is supposed to represent the object
+// that the function is being called on.
+// In the case of simply calling fn(), that’s exactly what we see.
 
 

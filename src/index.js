@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Login from './Login/Login';
-import AppRoute from '../router/AppRoute';
-import {getStore} from '../getStore';
+import AppRoute from './router/AppRoute';
+import {getStore} from './getStore';
 const store = getStore();
 import { Provider } from 'react-redux';
+import {add, higAdd} from '../challenge';
 class App extends React.Component {
     state = {
       answer:0
+    }
+
+    constructor(props){
+      super(props);
+      const res = add(5)(6);
+      console.log(res);
+      console.log(higAdd(5)(6));
     }
 
     asyncFunc = () => {

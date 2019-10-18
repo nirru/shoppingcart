@@ -14,7 +14,6 @@ export const planList = createReducer(null, {
     return fromJS(item.data);
   },
   [ADD_PLAN](state,{item}) {
-    console.log(item)
     if (state.find(detail=> {
       console.log(detail)
       return detail.id === item.id;

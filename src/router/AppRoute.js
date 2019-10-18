@@ -11,7 +11,7 @@ import {
   HocDashboard,
   HocPool,
   HocProfile,
-  HocSubscription, HocUpdatePlan,
+  HocSubscription, HocTransaction, HocUpdatePlan,
   HocUSerDetail
 } from './routes';
 import NotFound from '../components/NotFound/NotFound';
@@ -33,6 +33,7 @@ class AppRoute extends React.Component {
               <Route path="/plan" component={HocSubscription}/>
               <Route path="/add-plan" component={HocAddPlan}/>
               <Route path="/update-plan/:id" component={HocUpdatePlan} />
+              <Route path="/transaction" component={HocTransaction}/>
               <Route path="*" component={NotFound}/>
             </Switch>
           </ErrorBoundary>

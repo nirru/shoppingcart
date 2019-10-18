@@ -10,6 +10,7 @@ import UserDetail from '../components/Home/UserDetail/UserDetail';
 import Subscription from '../components/subsription/Subscription';
 import AddPlan from '../components/subsription/AddPlan';
 import UpdatePlan from '../components/subsription/UpdatePlan';
+import Transaction from '../components/transaction/Transaction';
 
 export const HocDashboard = compose(requiresAuth,drawerHoc)(Home);
 
@@ -24,6 +25,8 @@ export const HocSubscription = compose(requiresAuth,drawerHoc)(Subscription);
 export const HocAddPlan = compose(requiresAuth,drawerHoc)(AddPlan);
 
 export const HocUpdatePlan = compose(requiresAuth,drawerHoc)(UpdatePlan);
+
+export const HocTransaction = compose(requiresAuth,drawerHoc)(Transaction);
 
 export const HocAbout = drawerHoc(About);
 

@@ -1,15 +1,15 @@
 import React from 'react';
 import {history} from '../../helper/history';
 import {connect} from 'react-redux';
-import { poolListSelector} from '../../selectors';
-import { getPoolList} from '../../actions';
-import './pool.css';
+import { transactionListSelector} from '../../selectors';
+import { getTransactionList} from '../../actions';
+import './transaction.css';
 import Switch from '../Switch/Switch';
-class Pool extends React.Component{
+class Transaction extends React.Component{
 
   componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(getPoolList());
+    dispatch(getTransactionList());
   }
 
 
@@ -25,7 +25,7 @@ class Pool extends React.Component{
     // console.log(d.getDay());
     return d.getUTCDay() + '/' + (d.getUTCMonth() +1)+ '/' + d.getUTCFullYear();
     // + ' ' + d.getUTCHours() + ' hrs' + ' ' + d.getUTCMinutes() + ' min ' + d.getUTCSeconds() + ' sec';
-  }
+  };
 
 
   render() {
@@ -37,9 +37,9 @@ class Pool extends React.Component{
           <div className="table-title">
             <div className="row">
               <div className="col-sm-5">
-                <h2>Pool Management</h2>
+                <h2>Plan Management</h2>
               </div>
-              <div className="col-sm-7" onClick={()=>history.push('/add-plan')} style={{display:'none'}}>
+              <div className="col-sm-7" onClick={()=>history.push('/add-plan')}>
                 <a href="#" className="btn btn-primary"><i className="material-icons">&#xE147;</i>
                   <span>Add New Pool</span></a>
               </div>
@@ -49,31 +49,31 @@ class Pool extends React.Component{
             <thead>
               <tr>
                 <th>#</th>
-                <th>Pool Name</th>
-                <th>Member</th>
-                <th>Total Amount</th>
-                <th>Reason</th>
-                <th>Start Date</th>
-                <th>Due Date</th>
-                <th>End Date</th>
+                <th>Trans Name</th>
+                <th>Amount(USD)</th>
+                <th>Date</th>
+                <th>Message</th>
+                <th>Pool Id</th>
+                <th>Plan Id</th>
+                <th>User Id</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {data && data.map(item=>{
-                return <tr key={item.pool_id}>
+                return <tr key={item.history_id}>
+                  <td>{item.history_id}</td>
+                  <td>{item.name}</td>
+                  <td>{item.transaction_amount}</td>
+                  <td>{this.getReadabletime(item.transaction_date)}</td>
+                  <td>{item.transaction_message}</td>
                   <td>{item.pool_id}</td>
-                  <td>{item.pool_name}</td>
-                  <td>{item.no_of_deduction_or_members}</td>
-                  <td>{item.total_amount}</td>
-                  <td>{item.reason}</td>
-                  <td>{this.getReadabletime(item.start_date)}</td>
-                  <td>{this.getReadabletime(item.due_date)}</td>
-                  <td>{this.getReadabletime(item.end_date)}</td>
+                  <td>{item.plan_id}</td>
+                  <td>{item.user_id}</td>
                   <td>
                     <Switch
-                      checked={item.pool_status === 1 ? true : false}
-                      onChange={(e)=>this.handleChange(e,item)}
+                      checked={item.transaction_status === 1 ? true : false}
+                      // onChange={(e)=>this.handleChange(e,item)}
                     />
                   </td>
                   <td>
@@ -116,13 +116,13 @@ class Pool extends React.Component{
 
 
 const mapStateToProps = (state) => {
-  const pool = poolListSelector(state);
-  return pool ? {
-    data:pool.toJS(),
+  const transaction = transactionListSelector(state);
+  return transaction ? {
+    data:transaction.toJS(),
     fetched:true
   } : {
     fetched:false
   };
 };
 
-export default connect(mapStateToProps,undefined)(Pool);
+export default connect(mapStateToProps,undefined)(Transaction);

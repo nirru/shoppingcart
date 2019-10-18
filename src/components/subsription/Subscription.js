@@ -21,10 +21,10 @@ class Subscription extends React.Component{
     // userSelector(1)(0)(store.getState());
   };
 
-  updatePlan = (id) => {
+  updatePlan = (id,plan) => {
     // const {dispatch} = this.props;
     // dispatch(setAddPlan(id));
-    history.push(`/update-plan/${id}`);
+    history.push(`/update-plan/${id}`,plan);
   }
 
   deletPlan = (id) => {
@@ -79,7 +79,7 @@ class Subscription extends React.Component{
                       className="settings"
                       title="Settings"
                       data-toggle="tooltip"
-                      onClick={()=> this.updatePlan(item.id)}>
+                      onClick={()=> this.updatePlan(item.id,item)}>
                       <i className="material-icons">&#xE8B8;</i>
                     </a>
                     <a href="#"

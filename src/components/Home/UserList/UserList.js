@@ -12,6 +12,7 @@ import {history} from '../../../helper/history';
 // import StepTwo from './HookExample';
 import LifeCycleTest from './LifeCycleTest';
 import {factorialOfNumber, firstNonRepeating, reverseString} from "../../../exam/exam";
+import Parent from './Parent';
 
 class UserList extends React.Component{
   constructor(props){
@@ -20,9 +21,9 @@ class UserList extends React.Component{
       checkedItems: new Map(),
     };
 
-    console.log(firstNonRepeating('foobar'));
-    console.log(factorialOfNumber(3));
-    console.log(reverseString('Hello'));
+    // console.log(firstNonRepeating('foobar'));
+    // console.log(factorialOfNumber(3));
+    // console.log(reverseString('Hello'));
     // const movies = new MovieCollection('Fav Movies',
     //   { name: 'Movie', stars: 10 },
     //   { name: 'Star Trek', stars: 1 },
@@ -154,6 +155,7 @@ class UserList extends React.Component{
           </div>
         </div>
         <LifeCycleTest/>
+
       </div>
 
     );

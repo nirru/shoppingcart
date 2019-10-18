@@ -61,12 +61,12 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: [
     '@babel/polyfill',
-    path.join(__dirname, 'src',  'components/Index.js'),
+    './src/index.js'
   ],
   output: {
-    path: path.join(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/',
+    filename: 'bundle.js'
   },
   module: {
     rules: [
@@ -107,21 +107,28 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebPackPlugin({
-      title: 'React Starter Kit',
-      hash: true,
-      inject: false,
-      appMountId: 'root',
-      // template: '!!ejs-loader!./views/index.ejs'
-      template: './public/index.html'
-    }),
+    // new HtmlWebPackPlugin({
+    //   title: 'React Starter Kit',
+    //   hash: true,
+    //   inject: false,
+    //   appMountId: 'root',
+    //   // template: '!!ejs-loader!./views/index.ejs'
+    //   template: './public/index.html'
+    // }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         API_URL: JSON.stringify(process.env.API_URL),
         IMAGE_URL: JSON.stringify(process.env.IMAGE_URL),
       }
-    })
+    }),
+
+    new HtmlWebPackPlugin({
+      template: './src/index.html',
+      filename: './index.html'
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ],
   devServer: {
     hot: true,

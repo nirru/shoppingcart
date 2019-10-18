@@ -1,21 +1,23 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { setAddPlan, addPlan} from '../../actions';
+import {setAddPlan, addPlan, getPlanList, setUpdatePlan} from '../../actions';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
-import {itemPlanSelector} from '../../selectors/planListSelector';
+import {itemPlanSelector, planListSelector} from '../../selectors/planListSelector';
 import {getStore} from '../../getStore';
 class UpdatePlan extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {
-      plan_name: '',
-      plan_duration: '',
-      plan_amount: '',
+    console.log(this.props.location.state);
+    this.state ={
+      id:this.props.location.state.id,
+      plan_name: this.props.location.state.plan_name,
+      plan_duration:this.props.location.state.plan_duration,
+      plan_amount:this.props.location.state.plan_amount,
     };
 
-  }
 
+  }
 
 
   handleChange = name => event => {
@@ -26,9 +28,8 @@ class UpdatePlan extends React.Component{
 
   callback = e => {
     e.preventDefault();
-    console.log(this.state);
     const {dispatch} = this.props;
-    dispatch(setAddPlan(this.state));
+    dispatch(setUpdatePlan(this.state));
   };
   render() {
     return (
@@ -61,7 +62,7 @@ class UpdatePlan extends React.Component{
                   </div>
 
                   <button className="btn btn-lg btn-primary btn-block text-uppercase"
-                    type="submit">Create Plan
+                    type="submit">Update Plan
                   </button>
 
                 </form>
@@ -73,17 +74,6 @@ class UpdatePlan extends React.Component{
     );
   }
 }
-const mapStateToProps = (state,props) => {
-  console.log(props.match.params.id);
-  const plan = itemPlanSelector(props.match.params.id)(state);
-  console.log(price);
-  return plan ? {
-    data:plan.toJS(),
-    fetched:true
-  } : {
-    fetched:false
-  };
 
-}
-const Result = compose(withRouter,connect(mapStateToProps,undefined))(UpdatePlan);
+const Result = compose(withRouter,connect(undefined,undefined))(UpdatePlan);
 export default Result;

@@ -5,7 +5,6 @@ import {GET_PLAN_LIST, setPlanList} from '../actions';
 function * fetchPlan() {
   const response = yield fetch(`${process.env.API_URL}/listSubscriptionPlan`);
   const data = yield response.json();
-  console.log(data);
   yield put(setPlanList(data));
 }
 
