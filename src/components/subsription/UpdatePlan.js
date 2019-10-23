@@ -1,10 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setAddPlan, addPlan, getPlanList, setUpdatePlan} from '../../actions';
+import {setUpdatePlan} from '../../actions';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
-import {itemPlanSelector, planListSelector} from '../../selectors/planListSelector';
-import {getStore} from '../../getStore';
 class UpdatePlan extends React.Component{
   constructor(props) {
     super(props);

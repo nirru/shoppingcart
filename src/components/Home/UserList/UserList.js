@@ -2,93 +2,70 @@ import React from 'react';
 import './userlist.css';
 import Switch from '../../Switch/Switch';
 import {connect} from 'react-redux';
-import { setActiveUser} from '../../../actions';
+import {getUserList, getUserSearch, setActiveUser, setDeleteUser} from '../../../actions';
 import {userListSelector} from '../../../selectors/userListSelector';
 import {history} from '../../../helper/history';
-// import './test';
-// import './ProtoTest';
-// import MovieCollection from './MovieCollection';
-// import MyLinkedList from './MyLinkedList';
-// import StepTwo from './HookExample';
-import LifeCycleTest from './LifeCycleTest';
-import {factorialOfNumber, firstNonRepeating, reverseString} from "../../../exam/exam";
-import Parent from './Parent';
+import {compose} from 'redux';
+import {withRouter} from 'react-router-dom';
+let isLoaded= false;
+let initData = [];
 
 class UserList extends React.Component{
   constructor(props){
     super(props);
+    isLoaded= false;
     this.state = {
       checkedItems: new Map(),
     };
-
-    // console.log(firstNonRepeating('foobar'));
-    // console.log(factorialOfNumber(3));
-    // console.log(reverseString('Hello'));
-    // const movies = new MovieCollection('Fav Movies',
-    //   { name: 'Movie', stars: 10 },
-    //   { name: 'Star Trek', stars: 1 },
-    //   { name: 'Virgin', stars: 7 },
-    //   { name: 'King of the Road', stars: 8 }
-    // );
-
-    // for (const movie of movies){
-    //   // console.log(movie);
-    // }
-
-    // console.log(movies.length);
-    // movies.addMovie({ name: 'Chichore', stars: 10 });
-    // console.log(movies.length);
-
-    // const myList = new MyLinkedList();
-    // for(var i=1;i<=10;i++) {
-    //   myList.add(i);
-    // }
-    // myList.add(10);
-    // myList.add(8);
-    // myList.add(15);
-    // myList.add(7);
-    // myList.add(20);
-    // myList.add(6);
-    // console.log(myList.printList());
-    // console.log(myList.getLength());
-    // console.log(myList.remove(0));
-    // console.log(myList.printList());
-    // console.log(myList.getLength());
-    // console.log(myList.search(3));
-    // console.log(myList.insertAfter(19,6));
-
-    // console.log(myList.sort());
-    // console.log(myList.printList());
+    const {dispatch} = this.props;
+    dispatch(getUserList());
   }
 
-
+  getReadabletime = (time) =>{
+    const d = new Date(time);
+    // console.log(d.getUTCHours()); // Hours
+    // console.log(d.getDay());
+    return d.getUTCDay() + '/' + (d.getUTCMonth() +1)+ '/' + d.getUTCFullYear();
+    // + ' ' + d.getUTCHours() + ' hrs' + ' ' + d.getUTCMinutes() + ' min ' + d.getUTCSeconds() + ' sec';
+  };
+  handleSearch=(q)=> {
+    // console.log(q.target.value);
+    const {dispatch} = this.props;
+    dispatch(getUserSearch(q.target.value,initData));
+  };
 
   handleChange = (e,item) => {
     const isChecked = e.target.checked;
-    // this.setState(prevState => {
-    //   return ({ checkedItems: prevState.checkedItems.set(item, isChecked) });
-    // });
     const {dispatch} = this.props;
     dispatch(setActiveUser(item.id,isChecked));
-    // const store = getStore();
-    // userSelector(1)(0)(store.getState());
+  };
+
+  deleteUserById = (id) => {
+    const {dispatch} = this.props;
+    dispatch(setDeleteUser(id));
   };
   render() {
     const {message,fetched,data} = this.props;
     // console.log(data);
+    if (fetched && !isLoaded){
+      isLoaded = true;
+      initData = data;
+    }
     return (
       <div className="div-css">
+
         <div className="table-wrapper">
           <div className="table-title">
             <div className="row">
               <div className="col-sm-5">
                 <h2>User Management</h2>
               </div>
-              <div className="col-sm-7">
-                <a href="#" className="btn btn-primary"><i className="material-icons">&#xE147;</i>
-                  <span>Add New User</span></a>
-                <a href="#" className="btn btn-primary"><i className="material-icons">&#xE24D;</i>
-                  <span>Export to Excel</span></a>
+              <div className="col-sm-7 d-flex justify-content-end">
+                {/*<a href="#" className="btn btn-primary"><i className="material-icons">&#xE147;</i>*/}
+                {/*  <span>Add New User</span></a>*/}
+                {/*<a href="#" className="btn btn-primary"><i className="material-icons">&#xE24D;</i>*/}
+                {/*  <span>Export to Excel</span></a>*/}
+                <input type="text" onChange={this.handleSearch} placeholder={'search'} className="form-control w-25" />
               </div>
             </div>
           </div>
@@ -101,7 +78,7 @@ class UserList extends React.Component{
                 <th>Email</th>
                 <th>Mobile</th>
                 <th>Name</th>
-                <th>Location</th>
+
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -120,6 +97,7 @@ class UserList extends React.Component{
                   <td>{item.mobile_number}</td>
                   <td>{item.first_name + ' ' + item.last_name}</td>
                   <td>{'lat=' + item.latitude + ', lng=' + item.longitude}</td>
+
                   <td>
                     <Switch
                       checked={item.is_account_active === 1 ? true : false}
@@ -131,30 +109,30 @@ class UserList extends React.Component{
                       className="settings"
                       title="Settings"
                       data-toggle="tooltip"
-                      onClick={()=>history.push(`/user/${item.id}`)}>
+                      onClick={()=>history.push(`/user/${item.id}`,item)}>
                       <i className="material-icons">&#xE8B8;</i>
                     </a>
-                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i
+                    <a href="javascript:void(0)" onClick={()=>this.deleteUserById(item.id)} className="delete" title="Delete" data-toggle="tooltip"><i
                       className="material-icons">&#xE5C9;</i></a>
                   </td>
                 </tr>;
               })}
             </tbody>
           </table>
-          <div className="clearfix">
-            <div className="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-            <ul className="pagination">
-              <li className="page-item disabled"><a href="#">Previous</a></li>
-              <li className="page-item"><a href="#" className="page-link">1</a></li>
-              <li className="page-item"><a href="#" className="page-link">2</a></li>
-              <li className="page-item active"><a href="#" className="page-link">3</a></li>
-              <li className="page-item"><a href="#" className="page-link">4</a></li>
-              <li className="page-item"><a href="#" className="page-link">5</a></li>
-              <li className="page-item"><a href="#" className="page-link">Next</a></li>
-            </ul>
-          </div>
+          {/*<div className="clearfix">*/}
+          {/*  <div className="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>*/}
+          {/*  <ul className="pagination">*/}
+          {/*    <li className="page-item disabled"><a href="#">Previous</a></li>*/}
+          {/*    <li className="page-item"><a href="#" className="page-link">1</a></li>*/}
+          {/*    <li className="page-item"><a href="#" className="page-link">2</a></li>*/}
+          {/*    <li className="page-item active"><a href="#" className="page-link">3</a></li>*/}
+          {/*    <li className="page-item"><a href="#" className="page-link">4</a></li>*/}
+          {/*    <li className="page-item"><a href="#" className="page-link">5</a></li>*/}
+          {/*    <li className="page-item"><a href="#" className="page-link">Next</a></li>*/}
+          {/*  </ul>*/}
+          {/*</div>*/}
         </div>
-        <LifeCycleTest/>
+        {/*<LifeCycleTest/>*/}
 
       </div>
 
@@ -172,7 +150,7 @@ const mapStateToProps = (state) => {
     fetched:false
   };
 };
-
-export default connect(mapStateToProps,undefined)(UserList);
+const Result = compose(withRouter,connect(mapStateToProps,undefined))(UserList);
+export default Result;
 
 // export default UserList;

@@ -1,6 +1,11 @@
 export const privateNav = [
+  // {
+  //   url: '/',
+  //   // name: 'Dashboard',
+  // },
+
   {
-    url: '/',
+    url: '/users',
     name: 'User Management',
   },
   {
@@ -9,20 +14,21 @@ export const privateNav = [
   },
   {
     url: '/plan',
-    name: 'Plan',
+    name: 'Plan Management',
   },
   {
     url: '/transaction',
-    name: 'Transaction',
+    name: 'Transaction Management',
   },
   {
-    url: '/survey',
-    name: 'Survey',
+    url: '/tips',
+    name: 'Tips Management',
   },
-  {
-    url: '/profile',
-    name: 'Profile',
-  },
+  // {
+  //   url: '/profile',
+  //   name: 'Profile',
+  // },
+
   {
     url: '/login',
     name: 'Logout',

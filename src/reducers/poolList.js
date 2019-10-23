@@ -1,5 +1,6 @@
 import { createReducer } from './../utility';
-import { SET_POOL_LIST,
+import {
+  SET_POOL_LIST,
 } from '../actions';
 
 import {
@@ -8,6 +9,7 @@ import {
 
 export const poolList = createReducer(null, {
   [SET_POOL_LIST](state,{item}) {
+    // console.log(state);
     return fromJS(item.data);
   },
   // [ADD_PLAN](state,{item}) {

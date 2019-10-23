@@ -4,7 +4,7 @@ import AppRoute from './router/AppRoute';
 import {getStore} from './getStore';
 const store = getStore();
 import { Provider } from 'react-redux';
-import {add, higAdd} from '../challenge';
+import {add, higAdd,stairCase} from '../challenge';
 class App extends React.Component {
     state = {
       answer:0
@@ -15,6 +15,7 @@ class App extends React.Component {
       const res = add(5)(6);
       console.log(res);
       console.log(higAdd(5)(6));
+      // console.log(stairCase(6));
     }
 
     asyncFunc = () => {

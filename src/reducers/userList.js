@@ -1,6 +1,6 @@
 import { createReducer } from './../utility';
 import { fromJS} from 'immutable';
-import {SET_USER_LIST,SET_ACTIVE_USER} from '../actions';
+import {SET_USER_LIST, SET_ACTIVE_USER, DELETE_USER} from '../actions';
 
 export const userList = createReducer(null, {
   [SET_USER_LIST]:(state,action)=> {
@@ -17,5 +17,18 @@ export const userList = createReducer(null, {
     };
     return fromJS(result);
   },
+  [DELETE_USER](state,{id}){
+    // console.log(state);
+    const arry = state .get('data').filter(a => {
+      // console.log(a);
+      return a.get('id') !== id;
+    });
+    const result = {
+      status:state.get(status),
+      message:state.get('message'),
+      data:arry
+    };
+    return fromJS(result);
+  }
 
 });

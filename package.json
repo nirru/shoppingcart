@@ -66,19 +66,21 @@
     "env-cmd": "^9.0.3",
     "es6-promise": "^4.2.8",
     "express": "^4.17.1",
+    "history": "latest",
     "immutable": "^4.0.0-rc.12",
     "isomorphic-fetch": "^2.2.1",
     "pm2": "^3.5.1",
     "query-string": "^6.8.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-google-charts": "^3.0.15",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
+    "react-svg-piechart": "^2.4.1",
     "redux": "^4.0.4",
     "redux-saga": "^1.0.5",
     "reselect": "^4.0.0",
     "webpack": "^4.36.1",
-    "webpack-merge": "^4.2.1",
-    "history": "latest"
+    "webpack-merge": "^4.2.1"
   }
 }

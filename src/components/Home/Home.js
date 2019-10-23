@@ -4,13 +4,17 @@ import {connect} from 'react-redux';
 import {getUserList} from '../../actions';
 import UserList from './UserList/UserList';
 import {userListSelector} from '../../selectors/userListSelector';
+import Statistics from '../statistics/Statistics';
+import Survey from '../survey/Survey';
+import Switch from '../Switch/Switch';
+import {history} from '../../helper/history';
 
 class Home extends React.Component {
   constructor(props){
     super(props);
     console.log(process.env.API_URL);
-    const {dispatch} = this.props;
-    dispatch(getUserList());
+    // const {dispatch} = this.props;
+    // dispatch(getUserList());
     // console.log(this.findFactorial(4));
     // console.log(this.firstReverse('Nirmal Kumar'));
     // console.log(this.letterChange('fun times!'));
@@ -50,17 +54,42 @@ class Home extends React.Component {
      */
      const arrSum = ar.reduce((a,b) => a + b, 0);
      return arrSum;
-
    }
 
-
-
    render() {
-     const {message,fetched,data} = this.props;
-     // console.log(data);
      return (
        <div className="wrapper">
-         {fetched ? <UserList/> : 'loading....'}
+         <div className="div-css">
+           <div className="row">
+             <div className="col-md-6 mb-4">
+               <div className="card full-height d-flex justify-content-center align-items-center shadow-sm">
+
+
+                 <div id="circles-1"><Statistics id = {2}/></div>
+
+               </div>
+             </div>
+             <div className="col-md-6 mb-4">
+               <div className="card full-height d-flex justify-content-center align-items-center shadow-sm">
+                 <div id="circles-2"><Statistics id = {1}/></div>
+               </div>
+             </div>
+
+             <div className="col-md-6 mb-4">
+               <div className="card full-height d-flex justify-content-center align-items-center shadow-sm">
+                 <div id="circles-2"><Statistics id = {3}/></div>
+               </div>
+             </div>
+             <div className="col-md-6 mb-4">
+               <div className="card full-height d-flex justify-content-center align-items-center shadow-sm">
+
+                 <div id="circles-2"><Survey/></div>
+
+               </div>
+             </div>
+           </div>
+
+         </div>
        </div>
      );
    }

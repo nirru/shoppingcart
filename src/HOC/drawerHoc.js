@@ -39,14 +39,14 @@ export const drawerHoc = (Component) => {
 
           <div id="content">
 
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-white">
               <div className="container-fluid">
 
-                <button type="button" id="sidebarCollapse" className="navbar-btn">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </button>
+                {/*<button type="button" id="sidebarCollapse" className="navbar-btn">*/}
+                {/*  <span></span>*/}
+                {/*  <span></span>*/}
+                {/*  <span></span>*/}
+                {/*</button>*/}
                 <button className="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
                   data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                   aria-expanded="false" aria-label="Toggle navigation">
