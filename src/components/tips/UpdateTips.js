@@ -2,11 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
-import {setCreateTip, setUpdateTip} from '../../actions';
+import { setUpdateTip} from '../../actions';
 
 class UpdateTips extends React.Component{
   constructor(props) {
     super(props);
+    this.videoRef = React.createRef();
     this.state = {
       tips_id:this.props.location.state.tips_id,
       tips_title: this.props.location.state.tips_title,
@@ -28,6 +29,7 @@ class UpdateTips extends React.Component{
       tips_video:e.target.files[0],
       file:URL.createObjectURL(e.target.files[0]),
     });
+    this.videoRef.load();
   };
   callback = e => {
     e.preventDefault();
@@ -46,8 +48,8 @@ class UpdateTips extends React.Component{
                 <h5 className="card-title text-center">Update Tips</h5>
                 <form className="form-signin" onSubmit={this.callback}>
                   <div className="form-label-group text-center">
-                    <video width={300} height={300} controls >
-                      <source src={this.state.file} type="video/mp4"/>
+                    <video ref={this.videoRef} width={300} height={300} controls >
+                      <source  src={this.state.file} type="video/mp4"/>
                     </video>
                     <input type="file" onChange={this.handleFileChange} className="text-center center-block file-upload" accept="video/mp4"/>
                     <h6>Upload a different Video...</h6>

@@ -45,7 +45,7 @@ class UserList extends React.Component{
     dispatch(setDeleteUser(id));
   };
   render() {
-    const {message,fetched,data} = this.props;
+    const {fetched,data} = this.props;
     // console.log(data);
     if (fetched && !isLoaded){
       isLoaded = true;
