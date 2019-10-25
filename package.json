@@ -9,7 +9,8 @@
     "dev": "pm2 start src/server.js --watch --interpreter babel-node",
     "webpack": "webpack -wd",
     "start:dev": "cross-env NODE_ENV=development env-cmd -f ./.env.development webpack-dev-server --config ./index.js --open --mode development",
-    "prod": "cross-env NODE_ENV=development env-cmd -f ./.env.development webpack-dev-server --config ./index.js --open --mode development",
+    "prod": "cross-env NODE_ENV=production env-cmd -f ./.env.production webpack -p --config ./webpack.config.js",
+    "start": "NODE_ENV=production babel-node src/server.js",
     "build": "webpack",
     "test": "jest",
     "test:watch": "jest --watch"

@@ -11,6 +11,9 @@ class Login extends React.Component {
       email:'',
       password:'',
     };
+
+    console.log(process.env.NODE_ENV);
+    console.log(process.env.NODE_ABC);
   }
 
   componentDidMount() {
@@ -36,7 +39,7 @@ class Login extends React.Component {
         <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
           <div className="card card-signin my-5">
             <div className="card-body">
-              <h5 className="card-title text-center">Sign In</h5>
+              <h5 className="card-title text-center">Sign In Me</h5>
               <form className="form-signin" onSubmit={this.callback}>
                 <div className="form-label-group">
                   <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required

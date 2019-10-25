@@ -131,9 +131,4 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
-  devServer: {
-    hot: true,
-    historyApiFallback: true,
-    port:8087
-  }
 };

@@ -1,5 +1,5 @@
 node_modules
 *.log
-.env
-.env.production
-.env.development
+#.env
+#.env.production
+#.env.development
