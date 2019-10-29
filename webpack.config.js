@@ -64,7 +64,7 @@ module.exports = {
     './src/index.js'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -107,14 +107,10 @@ module.exports = {
     ]
   },
   plugins: [
-    // new HtmlWebPackPlugin({
-    //   title: 'React Starter Kit',
-    //   hash: true,
-    //   inject: false,
-    //   appMountId: 'root',
-    //   // template: '!!ejs-loader!./views/index.ejs'
-    //   template: './public/index.html'
-    // }),
+    new HtmlWebPackPlugin({
+      template: './src/index.html',
+      filename: './index.html'
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
@@ -124,11 +120,10 @@ module.exports = {
       }
     }),
 
-    new HtmlWebPackPlugin({
-      template: './src/index.html',
-      filename: './index.html'
-    }),
+
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
+
 };
+

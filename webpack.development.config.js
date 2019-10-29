@@ -16,7 +16,7 @@ module.exports = merge(require('./webpack.config'), {
   devServer: {
     host: '0.0.0.0',
     port: 3001,
-    contentBase: join(__dirname, 'dist'),
+    contentBase: './dist',
     historyApiFallback: true,
     hot: true,
   },

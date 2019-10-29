@@ -44,4 +44,4 @@ class App extends React.Component {
 export default App;
 
 ReactDom.render(<App/>,document.getElementById('root'));
-module.hot.accept();
+// module.hot.accept();
