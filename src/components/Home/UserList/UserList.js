@@ -78,7 +78,7 @@ class UserList extends React.Component{
                 <th>Email</th>
                 <th>Mobile</th>
                 <th>Name</th>
-
+                <th>Location</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
