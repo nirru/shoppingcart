@@ -55,7 +55,7 @@ class Subscription extends React.Component{
                 <th>Plan Name</th>
                 <th>Duration</th>
                 <th>Amount</th>
-                <th>Status</th>
+                {/*<th>Status</th>*/}
                 <th>Action</th>
 
               </tr>
@@ -68,12 +68,12 @@ class Subscription extends React.Component{
                   <td>{item.plan_duration}</td>
                   <td>{item.plan_amount}</td>
 
-                  <td>
-                    <Switch
-                      checked={item.is_active === 1 ? true : false}
-                      onChange={(e)=>this.handleChange(e,item)}
-                    />
-                  </td>
+                  {/*<td>*/}
+                  {/*  <Switch*/}
+                  {/*    checked={item.is_active === 1 ? true : false}*/}
+                  {/*    onChange={(e)=>this.handleChange(e,item)}*/}
+                  {/*  />*/}
+                  {/*</td>*/}
                   <td>
                     <a href="javascript:void(0)"
                       className="settings"

@@ -24,7 +24,7 @@ export const drawerHoc = (Component) => {
             </div>
 
             <ul className="list-unstyled components">
-              <p>Money Pool</p>
+              {/*<p>Money Pool</p>*/}
               {privateNav.map(item => {
                 return <li key={item.name}>
                   <a href="javascript:void(0)" onClick={()=> history.push(item.url)}>

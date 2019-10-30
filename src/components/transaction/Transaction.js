@@ -83,9 +83,10 @@ class Transaction extends React.Component{
                   <td>{item.plan_id}</td>
                   <td>{item.user_id}</td>
                   <td>
-                    <Switch readOnly = {true} checked={item.transaction_status === 1}
-                      // onChange={(e)=>this.handleChange(e,item)}
-                    />
+                    <b> {item.transaction_status === 1 ? 'Successed' : 'Failed'}</b>
+                    {/*<Switch readOnly = {true} checked={item.transaction_status === 1}*/}
+                    {/*  // onChange={(e)=>this.handleChange(e,item)}*/}
+                    {/*/>*/}
                   </td>
                   {/*<td>*/}
                   {/*  <a href="javascript:void(0)"*/}

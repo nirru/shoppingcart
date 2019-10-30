@@ -36,6 +36,19 @@ class Pool extends React.Component{
   };
 
 
+  poolStatus = (status) =>{
+    if (status === -1) {
+      return 'Cancelled';
+    } else if (status === 0){
+      return 'Pending';
+    } else if (status === 1){
+      return 'In-Progress';
+    } else if (status === 2){
+      return 'Completed';
+    } else {
+      return 'N/A'
+    }
+  }
   render() {
     const {data,fetched} = this.props;
     // console.log(data);
@@ -86,10 +99,7 @@ class Pool extends React.Component{
                   <td>{this.getReadabletime(item.due_date)}</td>
                   <td>{this.getReadabletime(item.end_date)}</td>
                   <td>
-                    <Switch
-                      checked={item.pool_status === 1 ? true : false}
-                      onChange={(e)=>this.handleChange(e,item)}
-                    />
+                    <b>{this.poolStatus(item.pool_status)}</b>
                   </td>
                   <td>
                     <a href="javascript:void(0)"

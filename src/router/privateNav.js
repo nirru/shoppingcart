@@ -1,8 +1,8 @@
 export const privateNav = [
-  // {
-  //   url: '/',
-  //   // name: 'Dashboard',
-  // },
+  {
+    url: '/',
+    name: 'Dashboard',
+  },
 
   {
     url: '/users',
