@@ -19,5 +19,6 @@ module.exports = merge(require('./webpack.config'), {
     contentBase: './dist',
     historyApiFallback: true,
     hot: true,
+    // headers: { 'Access-Control-Allow-Origin': '*' }
   },
 });

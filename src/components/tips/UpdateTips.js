@@ -24,12 +24,16 @@ class UpdateTips extends React.Component{
   };
 
   handleFileChange=e=>{
-    console.log(e.target.files[0]);
     this.setState({
       tips_video:e.target.files[0],
       file:URL.createObjectURL(e.target.files[0]),
     });
-    this.videoRef.load();
+    let getVideo = document.getElementById('playVideo');
+    let getSource = document.getElementById('sourceVideo');
+    getSource .setAttribute('src', URL.createObjectURL(e.target.files[0]));
+    getVideo .load();
+    getVideo .play();
+    getVideo .volume = 0.5;
   };
   callback = e => {
     e.preventDefault();
@@ -48,8 +52,8 @@ class UpdateTips extends React.Component{
                 <h5 className="card-title text-center">Update Tips</h5>
                 <form className="form-signin" onSubmit={this.callback}>
                   <div className="form-label-group text-center">
-                    <video ref={this.videoRef} width={300} height={300} controls >
-                      <source  src={this.state.file} type="video/mp4"/>
+                    <video id="playVideo" width={300} height={300} controls >
+                      <source id="sourceVideo" src={this.state.file} type="video/mp4"/>
                     </video>
                     <input type="file" onChange={this.handleFileChange} className="text-center center-block file-upload" accept="video/mp4"/>
                     <h6>Upload a different Video...</h6>

@@ -53,7 +53,6 @@ class UserList extends React.Component{
     }
     return (
       <div className="div-css">
-
         <div className="table-wrapper">
           <div className="table-title">
             <div className="row">

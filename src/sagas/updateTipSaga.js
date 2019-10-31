@@ -7,8 +7,8 @@ import {history} from '../helper/history';
 function * updateMyTip({tip}) {
   console.log(tip);
   const {tips_id,file,...rest} = tip;
-  console.log(tips_id);
-  console.log(rest)
+  // console.log(tips_id);
+  console.log(rest);
   let formData = new FormData();
   for (let [key, value] of Object.entries(rest)) {
     // console.log(`${key}: ${value}`);
@@ -19,12 +19,9 @@ function * updateMyTip({tip}) {
   const response = yield call(fetch,`${process.env.API_URL}updateTips/${tips_id}`,{
     method:'post',
     body: formData,
-    // headers: new Headers({
-    //   'Content-Type': 'application/json',
-    // }),
   });
   const data = yield apply(response, response.json);
-  // console.log(data);
+  console.log(data);
   if (data.status){
     // yield put(updatePlan(data));
     alert('Tips update successfully');
