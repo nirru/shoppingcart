@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useRef,Suspense} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 
 // const Test = React.lazy(()=>StepTwo);
 const StepTwo = () => {
