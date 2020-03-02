@@ -62,7 +62,6 @@ class WeahterDetail extends React.Component {
 
   render() {
     const {weather,fetched} = this.props;
-    console.log(weather);
     return (
       <div className="main-content-body">
         <Loader/>
@@ -114,7 +113,6 @@ class WeahterDetail extends React.Component {
 
 const mapStateToProps = (state) => {
   const weather = weatherDetailSelector(state);
-  // console.log(user.toJS());
   return weather ? {
     weather:weather.toJS(),
     fetched:true
