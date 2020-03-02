@@ -6,7 +6,6 @@ import ErrorBoundary from '../components/error/ErrorBoundary';
 
 import NotFound from '../components/NotFound/NotFound';
 import Home from '../components/Home/Home';
-import WeahterDetail from '../components/Home/WeahterDetail';
 
 class AppRoute extends React.Component {
   render() {
@@ -16,7 +15,6 @@ class AppRoute extends React.Component {
           <ErrorBoundary>
             <Switch>
               <Route exact path="/" component={Home}/>
-              <Route exact path="/:city" component={WeahterDetail}/>
               <Route path="*" component={NotFound}/>
             </Switch>
           </ErrorBoundary>

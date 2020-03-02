@@ -1,4 +1,4 @@
-import {apiStatusSelector, weatherDetailSelector} from '../../selectors';
+import {apiStatusSelector, cartItemSelector} from '../../selectors';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import React from 'react';

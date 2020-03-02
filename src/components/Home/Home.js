@@ -1,63 +1,187 @@
 import React from 'react';
 import './home.css';
 import '../../styles/loader.css';
-import {WEATHER} from '../../dummy/weather';
-import {history} from '../../helper/history';
+import {PRODUCT} from '../../dummy/product';
+import {decreaseItemQuantity, deleteItem, getCartItems, increaseItemQuantity} from '../../actions';
+import {cartItemSelector} from '../../selectors';
+import {compose} from 'redux';
+import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import ProductDialog from '../dialog/Dialog';
 
+let total = 0;
 class Home extends React.Component {
   constructor(props){
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-      data:WEATHER,
-      fetching:undefined,
+      coupon:0,
+      value:'',
+      item:undefined,
     };
+
+    const {dispatch} = this.props;
+    dispatch(getCartItems());
   }
 
-  getWeahterInfo = () => {
-    const result = this.state.data.find(item => item.checked === true);
-    history.push(`/${result.city}`);
-  };
 
   handleChange(e) {
-    const a =   this.state.data.map(item=>{
-      if (item.id == parseInt(e.target.value)) {
-        return {...item,checked:e.target.checked};
-      }
-      else {
-        return {...item,checked: false};
-      }
-    });
-
-    this.setState({data:a});
+    this.setState({value:e.target.value});
   }
 
+  deleteItem = (id)=>{
+    const {dispatch} = this.props;
+    dispatch(deleteItem(id));
+  };
 
+  openDialog = (item) => {
+    this.setState({
+      item:item,
+    });
+  };
 
+  onDialogClose = () => {
+    this.setState({item:undefined});
+  }
+
+  quantitySelection = (id,originalPrice,k)=>{
+    const {dispatch} =  this.props;
+    this.setState({value:''});
+    const product = PRODUCT.find(item=>item.id === id);
+    if (k === 1){
+      dispatch(increaseItemQuantity(id,product.price));
+    } else {
+      dispatch(decreaseItemQuantity(id,product.price));
+    }
+  };
+
+  calculateSubTotal = (data)=>{
+    let price = 0;
+    data.map(item=>{
+      price = price + item.price;
+      return item;
+    });
+    // price = price + 100;
+    total = price;
+    return  parseFloat(price).toFixed(2);
+  };
+
+  calculateTotalWithShipping = (data)=>{
+    const result = parseFloat(this.calculateSubTotal(data)) + 100;
+    total = result;
+    return parseFloat(result).toFixed(2);
+  }
+
+  totalAfterCoupon = () => {
+    // console.log('sds');
+    if (this.state.value !== ''){
+      const result = total - 100;
+      document.getElementById('total-cost').innerHTML = parseFloat(result).toFixed(2);
+    } else {
+      alert('please enter coupon code');
+    }
+  }
 
   render() {
-    const {data} = this.state;
+    const {cart,fetched} = this.props;
+    const {coupon,item} = this.state;
     return (
-      <div className="main-content-body">
-        <div className="shadow-box">
-          <div className="block-text-group">
+      <div>
+        {item !== undefined ? <ProductDialog item = {item} close = {this.onDialogClose}/> : null};
+        <div className="heading">
+          <h1>
+            Shopping Cart
+          </h1>
 
-            {data.map(item=> {
-              return <div key={item.id} className="form-wrapper">
-                <div className="form-group checkbox">
-                  <label htmlFor={item.id}>
-                    <input type="checkbox" id="t1" checked={item.checked} value = {item.id}  onChange={this.handleChange}/>
-                    <span className="checkboxtext"></span>
-                    {item.city}
-                  </label>
+
+        </div>
+
+        <div className="cart transition is-open">
+
+
+
+          <div className="table">
+
+
+            <div className="layout-inline row th">
+              <div className="col col-pro">Product</div>
+              <div className="col col-price align-center ">Price(Inr)</div>
+              <div className="col col-qty align-center">QTY</div>
+              <div className="col"></div>
+              <div className="col">Total(Inr)</div>
+            </div>
+
+            {fetched === true ? cart.map (item=>{
+              return  <div key={item.id} className="layout-inline row">
+
+                <div className="col col-pro layout-inline">
+                  <img src={item.imgUrl} alt={item.name}/>
+                  <p >{item.name}</p>
+                  <br/>
+                  <div className="product-desc">
+                    <p>Size : {item.size}</p>
+                    <p className="prod-color">Color:{item.color}</p>
+                  </div>
+
+                </div>
+                <div className="col col-price col-numeric align-center ">
+                  <p> {parseFloat(item.price/item.quantity)}</p>
+                </div>
+
+                <div className="col col-qty layout-inline">
+                  <a href="javascript:void(0)" className="qty qty-minus" onClick={()=>this.quantitySelection(item.id,item.price,0)}>-</a>
+                  <input type="numeric" value={item.quantity} disabled/>
+                  <a href="javascript:void(0)" className="qty qty-plus" onClick={()=>this.quantitySelection(item.id,item.price,1)}>+</a>
+                </div>
+
+                <div className="col col-vat col-numeric">
+                  <button className="delete-btn" onClick={()=>this.deleteItem(item.id)}>
+                    Delete
+                  </button>
+                  <button className="edit-btn" onClick={()=>this.openDialog(item)}>
+                    Edit
+                  </button>
+                </div>
+
+                <div className="col col-total col-numeric"><p> {parseFloat(item.price).toFixed(2)}</p>
                 </div>
               </div>;
-            })}
+            }) : null}
 
-          </div>
+            {fetched === true ?  <div className="tf">
+              <div className="row layout-inline">
+                <div className="col">
+                  <p>Sub Total</p>
+                </div>
+                <div className="col"><p >{this.calculateSubTotal(cart)}</p></div>
+              </div>
 
-          <div className="button-submit">
-            <button className="btn" onClick={()=>this.getWeahterInfo()}>Submit</button>
+              <div className="row layout-inline">
+                <div className="col">
+                  <p>Shipping</p>
+                </div>
+                <div className="col">
+                  <p>Rs 100</p>
+                </div>
+              </div>
+              <div className="row layout-inline">
+                <div className="col">
+                  <p>Apply Coupon</p>
+                </div>
+                <div className="col">
+                  <input placeholder="coupon code" value={this.state.value} style={{marginRight:'10px'}} onChange={this.handleChange}/>
+
+                  <a href="javascript:void(0)" className="btn btn-update" onClick={()=>this.totalAfterCoupon('ss')}>Apply</a>
+                </div>
+              </div>
+              <div className="row layout-inline">
+                <div className="col">
+                  <p>Total</p>
+                </div>
+                <div className="col"><p id="total-cost">{this.calculateTotalWithShipping(cart)}</p></div>
+              </div>
+            </div> : null}
+
           </div>
         </div>
       </div>
@@ -65,6 +189,14 @@ class Home extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  const cart = cartItemSelector(state);
+  return cart ? {
+    cart:cart.toJS(),
+    fetched:true
+  } : {
+    fetched:false
+  };
+};
+export default compose(withRouter,connect(mapStateToProps,undefined))(Home);
 
-
-export default Home

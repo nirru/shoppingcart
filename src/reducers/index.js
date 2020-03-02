@@ -1,2 +1,3 @@
-export { weatherDetail } from './weatherDetail';
 export { api } from './api';
+export { cartItems } from './cartItems';
+
