@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import { spy } from 'sinon';
 // Component to be tested
-import Login from '../../src/components/Login/Login';
 
 describe('Login Component', () => {
 

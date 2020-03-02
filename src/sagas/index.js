@@ -1,18 +1,2 @@
-export { currentUserSaga } from './currentUserSaga';
-export { fetchUserSaga,searchUserSaga } from './fetchUserSaga';
-export { activeUserSaga } from './activeUserSaga';
-export { updateUserSaga } from './updateUserSaga';
-export { fetchPlanSaga } from './fetchPlanSaga';
-export { createPlanSaga } from './addPlanSaga';
-export { deletePlanSaga } from './deletePlanSaga';
-export { updatePlanSaga } from './updatePlanSaga';
-export { fetchPoolSaga,searchPoolSaga } from './fetchPoolSaga';
-export { fetchTransactionSaga,searchTransactionSaga } from './fetchTransactionSaga';
-export { fetchPoolDetailSaga } from './fetchPoolDetailSaga';
-export { fetchSurveySaga } from './fetchSurveySaga';
-export { fetchStatisticsSaga } from './fetchStatisticsSaga';
-export { fetchTipSaga,searchTipSaga } from './fetchTipsSaga';
-export { deleteUserSaga } from './deleteUserSaga';
-export { createTipSaga } from './createTipSaga';
-export { updateTipSaga } from './updateTipSaga';
-export { deleteTipSaga } from './deleteTipSaga';
+
+export { fetchWeatherDetailSaga } from './fetchWeatherDetailSaga';
