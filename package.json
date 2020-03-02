@@ -6,7 +6,8 @@
   "author": "Nirmal Kumar",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=development env-cmd -f ./.env.development webpack-dev-server --config ./index.js --open --mode development",
+    "start": "babel-node src/server.js",
+    "dev": "cross-env NODE_ENV=development env-cmd -f ./.env.development webpack-dev-server --config ./index.js --open --mode development",
     "prod": "cross-env NODE_ENV=production env-cmd -f ./.env.production webpack -p --mode production --config ./webpack.config.js",
     "test": "jest",
     "test:watch": "jest --watch"
